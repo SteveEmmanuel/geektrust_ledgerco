@@ -134,7 +134,7 @@ def main():
 
                     amount_paid = int(ledger_entry.amount_paid(emi_no=float(emi_no)))
                     no_of_emis_left = int(ledger_entry.no_of_emi_left(emi_no=float(emi_no)))
-                    print(bank_name + ' ' + borrower_name + ' ' + str(amount_paid) + ' ' + str(no_of_emis_left))
+                    print(bank_name, borrower_name, str(amount_paid), str(no_of_emis_left))
                 else:
                     Exception("No borrower by that name")
             else:
