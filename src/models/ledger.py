@@ -31,5 +31,6 @@ class Ledger(dict):
     def __init__(self):
         super().__init__()
 
-    def add_entry_to_ledger(self, borrower_name, ledger_entry):
-        self[borrower_name] = ledger_entry
+    def add_entry_to_ledger(self, bank_name, borrower_name, ledger_entry):
+        self[bank_name] = {}
+        self[bank_name][borrower_name] = ledger_entry
