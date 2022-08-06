@@ -9,12 +9,22 @@ class LedgerEntry:
     def add_payment(self, payment):
         self.payment = payment
 
+    def balance(self):
+        if self.payment is None:
+            return self.bank_loan.total_amount()
+        else:
+            return self.bank_loan.total_amount() - self.payment.lump_sum_amount
+
     def amount_paid(self, emi_no):
         if self.payment is None:
             return emi_no * self.bank_loan.emi_amount()
         else:
             if emi_no >= self.payment.emi_no:
-                return self.payment.lump_sum_amount + (emi_no * self.bank_loan.emi_amount())
+                return self.payment.lump_sum_amount +\
+                       (self.balance()
+                        if ((emi_no * self.bank_loan.emi_amount()) + self.payment.lump_sum_amount) >
+                           self.bank_loan.total_amount()
+                        else emi_no * self.bank_loan.emi_amount())
             else:
                 return emi_no * self.bank_loan.emi_amount()
 
